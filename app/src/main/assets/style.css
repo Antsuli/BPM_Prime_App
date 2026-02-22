@@ -1,0 +1,201 @@
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+:root { --bg: #2d0a1a; --island: #5e163b; --accent: #ff4d88; --text: #fff; }
+.theme-dark { --bg: #121212; --island: #1e1e1e; --accent: #00ff88; --text: #fff; }
+.theme-mint { --bg: #0b1a14; --island: #1a3a2e; --accent: #00fa9a; --text: #fff; }
+.theme-blue { --bg: #0a192d; --island: #162a4a; --accent: #00b4d8; --text: #fff; }
+.theme-white { --bg: #ffffff; --island: #f0f0f0; --accent: #333; --text: #000; }
+
+body { 
+    background: var(--bg); color: var(--text); font-family: sans-serif; 
+    margin: 0; overflow: hidden; transition: 0.3s; 
+}
+
+
+button {
+    min-height: 48px;
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+
+header {
+    position: relative; z-index: 500; display: flex;
+    justify-content: space-between; padding: 20px; align-items: center;
+}
+.header-right { display: flex; align-items: center; gap: 10px; max-width: 75%; }
+
+.theme-container {
+    display: flex; overflow-x: auto; gap: 8px; padding: 5px;
+    scrollbar-width: none;
+}
+.theme-container::-webkit-scrollbar { display: none; }
+
+.theme-slit {
+    min-width: 70px; padding: 8px; border-radius: 10px;
+    border: 1px solid var(--accent); background: var(--island);
+    font-size: 10px; text-align: center; cursor: pointer;
+}
+
+
+#ui { display: flex; flex-direction: column; align-items: center; height: 80vh; justify-content: space-around; }
+
+.stat-island {
+    background: var(--island); width: 85%; padding: 25px;
+    border-radius: 25px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+#tap-btn {
+    -webkit-tap-highlight-color: transparent;
+    width: 220px; height: 220px; border-radius: 50%; border: 8px solid var(--accent);
+    background: var(--island); color: var(--accent); font-size: 26px; font-weight: bold;
+    box-shadow: 0 0 20px var(--accent); transition: 0.1s;
+}
+#tap-btn:active {
+    transform: scale(0.96);
+    background: var(--accent);
+    color: var(--bg);
+    box-shadow: 0 0 30px var(--accent);
+    transition: 0.05s;
+}
+
+
+.side-panel {
+    position: fixed; top: 0; width: 75%; height: 100%;
+    background: var(--island); z-index: 10000; transition: 0.4s ease; padding: 25px;
+}
+.side-panel.left { left: -100%; border-right: 2px solid var(--accent); }
+.side-panel.right { right: -100%; border-left: 2px solid var(--accent); }
+.side-panel.active { left: 0; right: 0; }
+
+.setting-item { display: flex; justify-content: space-between; margin: 20px 0; }
+
+
+.settings-label {
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.close-btn { width: 100%; padding: 10px; background: var(--accent); border: none; border-radius: 10px; color: var(--bg); font-weight: bold; }
+
+
+.history-item {
+    display: flex; justify-content: space-between;
+    padding: 15px 10px; border-bottom: 1px solid var(--accent);
+    font-size: 1.2rem; /* Updated to your requested size */
+}
+.history-item span { color: #888; font-size: 14px; }
+
+
+.dropdown { position: relative; display: inline-block; }
+.dropdown-content {
+    display: none; position: absolute; right: 0; top: 50px;
+    background: var(--island); min-width: 150px; border: 1px solid var(--accent);
+    border-radius: 10px; z-index: 1000;
+}
+.dropdown-content.show { display: block; }
+.dropdown-content a { color: var(--text); padding: 12px 16px; display: block; cursor: pointer; text-decoration: none; }
+
+
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.85); display: none;
+    justify-content: center; align-items: center; z-index: 99999;
+}
+.popup-content { width: 70% !important; animation: popIn 0.3s ease; }
+
+@keyframes popIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+
+.adj-controls { display: flex; justify-content: center; gap: 20px; margin: 20px 0; }
+
+.small-btn {
+    padding: 10px 20px; border-radius: 12px; border: 2px solid var(--accent);
+    background: transparent; color: var(--accent); font-weight: bold;
+}
+
+.main-calc {
+    margin-top: 40px; padding: 12px 25px; border-radius: 30px;
+    background: transparent; border: 1px solid var(--accent);
+    color: var(--accent); opacity: 0.6;
+}
+
+
+.switch { position: relative; display: inline-block; width: 50px; height: 24px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider {
+    position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #444; transition: .4s; border-radius: 24px;
+}
+.slider:before {
+    position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px;
+    background-color: white; transition: .4s; border-radius: 50%;
+}
+input:checked + .slider { background-color: var(--accent); }
+input:checked + .slider:before { transform: translateX(26px); }
+
+.clear-btn {
+    width: 100%; padding: 10px; margin-top: 20px;
+    background: transparent; border: 1px solid #ff4d4d;
+    color: #ff4d4d; border-radius: 10px; font-weight: bold;
+}
+.clear-btn:active { background: #ff4d4d; color: white; }
+
+#bpm-result { font-size: 1.2rem; opacity: 0.8; margin-top: 5px; color: var(--accent); }
+.counting { animation: pulse 1s infinite; }
+@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.7; } 100% { opacity: 1; } }
+
+
+.theme-slit {
+    min-width: 90px;
+    padding: 12px;
+    font-size: 14px;
+    border-radius: 15px;
+}
+
+
+header img, .header-right i, .header-right svg {
+    width: 32px;
+    height: 32px;
+}
+
+
+.theme-trigger {
+    background-color: rgba(0,0,0,0) !important;
+    background: none !important;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border-radius: 12px;
+    box-shadow: none !important;
+    outline: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.dropdown-content a {
+    padding: 18px 20px;
+    font-size: 1.1rem;
+}
+
+.icon-btn {
+    background: none !important;
+    border: none !important;
+    padding: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-tap-highlight-color: transparent;
+}
