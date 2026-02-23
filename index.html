@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="style.css">
+    <title>BPM Prime 2.0.0</title>
+</head>
+<body class="theme-pink">
+
+<header>
+    <div class="icon-btn" onclick="toggleMenu('history-menu')">🕒</div>
+
+    <div class="header-right">
+        <div class="dropdown">
+            <div class="icon-btn" onclick="toggleDropdown('modes-dropdown')">⇄</div>
+            <div id="modes-dropdown" class="dropdown-content">
+                <a onclick="showMode('tapper')">BPM Tapper</a>
+                <a onclick="showMode('calc')">Manual Calculator</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="icon-btn" onclick="toggleDropdown('theme-dropdown')">🎨</div>
+            <div id="theme-dropdown" class="dropdown-content">
+                <a onclick="setTheme('theme-pink')">Pink</a>
+                <a onclick="setTheme('theme-dark')">Dark</a>
+                <a onclick="setTheme('theme-mint')">Mint</a>
+                <a onclick="setTheme('theme-blue')">Blue</a>
+                <a onclick="setTheme('theme-white')">White</a>
+            </div>
+        </div>
+        <div class="icon-btn" onclick="toggleMenu('settings-menu')">⚙️</div>
+    </div>
+</header>
+
+<main id="view-tapper">
+    <div class="stat-island">
+        <div id="timer-display">Ready</div>
+        <h1 id="count-display">0</h1>
+        <p id="bpm-result">-- BPM</p>
+    </div>
+    <button id="tap-btn">TAP</button>
+    <button class="main-calc" onclick="finishEarly()">CALCULATE NOW</button>
+</main>
+
+<main id="view-calc" style="display: none;">
+    <div class="stat-island">
+        <h2>Manual Calc</h2>
+        <div class="input-group">
+            <label>Seconds</label>
+            <input type="number" id="manual-sec" placeholder="0">
+        </div>
+        <div class="input-group">
+            <label>Taps</label>
+            <input type="number" id="manual-taps" placeholder="0">
+        </div>
+        <button id="manual-calc-btn" onclick="calculateManual()">CALCULATE</button>
+        <h1 id="manual-res">-- BPM</h1>
+    </div>
+</main>
+
+<div id="history-menu" class="side-panel left">
+    <h2>History</h2>
+    <div id="history-list"></div>
+    <button class="clear-btn" onclick="clearHistory()">CLEAR ALL</button>
+    <button class="close-btn" onclick="toggleMenu('history-menu')">CLOSE</button>
+</div>
+
+<div id="settings-menu" class="side-panel right">
+    <h2>Settings</h2>
+    <div class="setting-item">
+        <span>Timer (Sec)</span>
+        <input type="number" id="timer-input" value="15" onchange="saveTimerSetting()">
+    </div>
+    <div class="setting-item">
+        <span>Haptics</span>
+        <label class="switch">
+            <input type="checkbox" id="haptic-toggle" checked onchange="saveHapticSetting()">
+            <span class="slider round"></span>
+        </label>
+    </div>
+    <button class="close-btn" onclick="toggleMenu('settings-menu')">CLOSE</button>
+</div>
+
+<div id="finish-popup" class="modal-overlay">
+    <div class="stat-island popup-content">
+        <h2>Result</h2>
+        <h1 id="popup-bpm">--</h1>
+        <p>BPM</p>
+        <p>Total Taps: <span id="popup-taps">0</span></p>
+        <div class="adj-controls">
+            <button class="small-btn" onclick="adjust(1)">+</button>
+            <button class="small-btn" onclick="adjust(-1)">-</button>
+        </div>
+        <button id="save-btn" class="close-btn" onclick="closePopup()">SAVE & DONE</button>
+    </div>
+</div>
+
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+:root { --bg: #2d0a1a; --island: #5e163b; --accent: #ff4d88; --text: #fff; }
+.theme-dark { --bg: #121212; --island: #1e1e1e; --accent: #00ff88; --text: #fff; }
+.theme-mint { --bg: #0b1a14; --island: #1a3a2e; --accent: #00fa9a; --text: #fff; }
+.theme-blue { --bg: #0a192d; --island: #162a4a; --accent: #00b4d8; --text: #fff; }
+.theme-white { --bg: #ffffff; --island: #f0f0f0; --accent: #333; --text: #000; }
+
+body { background: var(--bg); color: var(--text); font-family: sans-serif; margin: 0; overflow: hidden; }
+
+header { display: flex; justify-content: space-between; padding: 20px; align-items: center; position: relative; z-index: 1000; }
+.header-right { display: flex; gap: 15px; }
+
+.icon-btn { font-size: 1.5rem; cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent; }
+
+.dropdown { position: relative; }
+.dropdown-content {
+    display: none; position: absolute; right: 0; top: 40px;
+    background: var(--island); border: 1px solid var(--accent);
+    border-radius: 10px; min-width: 150px; z-index: 2000;
+}
+.dropdown-content.show { display: block; }
+.dropdown-content a { color: var(--text); padding: 12px; display: block; text-decoration: none; cursor: pointer; }
+.dropdown-content a:active { background: var(--accent); color: var(--bg); }
+
+main { display: flex; flex-direction: column; align-items: center; height: 85vh; justify-content: center; gap: 20px; }
+
+.stat-island { background: var(--island); width: 80%; padding: 20px; border-radius: 20px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+
+#tap-btn {
+    width: 200px; height: 200px; border-radius: 50%; border: 8px solid var(--accent);
+    background: var(--island); color: var(--accent); font-size: 24px; font-weight: bold;
+    box-shadow: 0 0 20px var(--accent); -webkit-tap-highlight-color: transparent;
+}
+#tap-btn:active { transform: scale(0.95); background: var(--accent); color: var(--bg); }
+
+.side-panel { position: fixed; top: 0; width: 80%; height: 100%; background: var(--island); z-index: 3000; transition: 0.3s; padding: 20px; box-sizing: border-box; }
+.side-panel.left { left: -100%; }
+.side-panel.right { right: -100%; }
+.side-panel.active { left: 0; right: 0; }
+
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 4000; }
+
+.input-group { margin: 15px 0; text-align: left; }
+.input-group label { display: block; color: var(--accent); margin-bottom: 5px; }
+.input-group input { width: 100%; padding: 10px; background: rgba(0,0,0,0.2); border: 1px solid var(--accent); color: white; border-radius: 5px; box-sizing: border-box; }
+
+.main-calc { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 10px 20px; border-radius: 20px; opacity: 0.6; }
+
+.history-item { display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+
+/* --- UNIVERSAL BUTTON STYLES --- */
+button, .close-btn, .clear-btn {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+    border: none;
+    margin-top: 10px;
+    font-family: inherit;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Primary Action Buttons (Close, Save, Calculate) */
+.close-btn, #manual-calc-btn {
+    background: var(--accent);
+    color: var(--bg);
+}
+
+.close-btn:active, #manual-calc-btn:active {
+    transform: scale(0.98);
+    filter: brightness(1.2);
+}
+
+/* Warning/Secondary Buttons (Clear All) */
+.clear-btn {
+    background: transparent;
+    border: 2px solid #ff4444;
+    color: #ff4444;
+}
+
+.clear-btn:active {
+    background: #ff4444;
+    color: #fff;
+}
+
+/* --- INPUT FIELD STYLING --- */
+input[type="number"] {
+    width: 100%;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid var(--accent);
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1.1rem;
+    text-align: center;
+    box-sizing: border-box;
+    outline: none;
+}
+
+/* Style the Labels to match the theme */
+.input-group label, .setting-item span {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.adj-controls {
+    display: flex;
+    flex-direction: column; /* Stacks them vertically */
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.small-btn {
+    /* Dimensions - making them circular like a dashboard dial */
+    width: 50px;
+    height: 50px;
+    min-height: 50px; /* Overrides any global button heights */
+
+    /* Colors - forcing the theme accent */
+    background: transparent;
+    border: 2px solid var(--accent);
+    color: var(--accent) !important; /* Forces it to NOT be white */
+
+    /* Text styling */
+    font-size: 1.8rem;
+    font-weight: bold;
+    border-radius: 50%;
+
+    /* Alignment */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0 auto;
+}
+
+.small-btn:active {
+    background: var(--accent);
+    color: var(--bg) !important; /* Flips color when pressed for feedback */
+    transform: scale(0.9);
+}
+
+/* Specific spacing for the Manual Calculator island */
+#view-calc .stat-island {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
