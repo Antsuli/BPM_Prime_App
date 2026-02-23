@@ -10,6 +10,7 @@
 ## Roadmap
 - [ ] Add session export to CSV/Text.
 - [ ] Implement haptic feedback intensity settings.
+- [ ] Add more finish sounds and finish sound switching/customizability
 
 ## Contributing
 This is currently a private beta project. Feedback is welcome, but I am not accepting pull requests at this time.
